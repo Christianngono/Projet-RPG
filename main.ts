@@ -1,3 +1,12 @@
+import { Menu } from "./menu";
+const menu = new Menu("Selectionnez une option :", ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6"]);
+menu.display();
+
+// Selection d'une option
+const optionSelected = menu.ask();
+console.log("Option selectionnee :", optionSelected);
+
+
 class character {
     constructor(
         protected name: string,
