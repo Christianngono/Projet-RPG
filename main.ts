@@ -23,6 +23,26 @@ class character {
             return;
         }
     }
+    // methode pour mourir
+    die() {
+        console.log(`${this.name} est mort`);
+    }
+    // methode pour avoir une vie
+    getHealth(): number {
+        return this.currentHP;
+    }
+    
+    // methode pour restaurer les points de vie
+    restoreHp(percentage: number) {
+        const restoredHP = Math.floor(this.maxHP * percentage);
+        this.currentHP += restoredHP;
+        if (this.currentHP > this.maxHP) {
+            this.currentHP = this.maxHP;
+        }
+    }
+
+    
+    
     
 
 
