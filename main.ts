@@ -41,9 +41,8 @@ class character {
         }
     }
 
-    
-    
-    
-
-
+    // methode pour ressuciter un personnage avec un pourcentage de sa vie
+    resurrect (percentage: number) {
+        this.currentHP = Math.floor(this.maxHP * percentage);
+    }
 }
