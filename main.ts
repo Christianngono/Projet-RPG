@@ -142,7 +142,29 @@ class Monster extends Character {
             }    
         }
     }   
-} 
+}
+
+class Voleur extends Character {
+    constructor(name: string) {
+        super(name, 50, 50, 30, 90, 90);
+    }
+    // methode pour pour voler un objet
+    steal(target: Character) {
+        console.log(`${this.name} vole un objet à ${targat.name}`);
+        const rand = Math.random();
+        if(rand < 0.4) {
+            console.log("Rien n'a été volé");
+        } else if (rand < 0.3) {
+            console.log("Potion obtenue");
+        } else if (rand < 0.15) {
+            console.log("fragment d'étoile obtenu");
+        } else if (rand < 0.1) {
+            console.log("Un éther obtenu");
+        } else if (rand < 0.05) {
+            console.log("Une demi-étoile obtenue");
+        }
+    }
+}
 
 
 class Boss extends Character {
