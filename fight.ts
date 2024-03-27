@@ -1,16 +1,16 @@
-import {character} from "./main";
+import {Character} from './character.ts';
 
 class Fight {
-    constructor(private team1: character[], private team2: character[]) {}
+    constructor(private team1: Character[], private team2: Character[]) {}
     
     // Metode pour determiner l'ordre des tours en fonction de la vitesse de chaque personnage
-    determineTurnOrder(): character[] {
-        const allCharacters: character[] = this.team1.concat(this.team2);
+    determineTurnOrder(): Character[] {
+        const allCharacters: Character[] = this.team1.concat(this.team2);
         return allCharacters.sort((a, b) => a.speed - b.speed);
     }
 
     // Methode pour verifier si tous les personnages d'une equipe sont morts ou vivants
-    isTeamDead(team: character[]): boolean {
+    isTeamDead(team: Character[]): boolean {
         return team.every(character => character.currentHP <= 0);    
     }
 
@@ -19,21 +19,29 @@ class Fight {
 
         // Si le personnage n'est pas mort afficher un message
         if (character.currentHP > 0) {
-            console.log(`${character.name} + "est vivant"`);
+            console.log("est vivant");
         } else if (character.currentHP <= 0) {
-            console.log(character.name + "est mort");
+            console.log("est mort");
         }
     }
 
     // Methode pour commencer un combat 
     start() {
         console.log("debut de combat");
-        let allCharacters: character[] = this.determineTurnOrder();
-        let index: number = 0;
+        let character: Character[] = this.determineTurnOrder();
+        let index = 0;
+        while (!this.isTeamDead(character)) {
+            this.stimulateTurn(character[index]);
+            index++;
+            if (index >= character.length) {
+                index = 0;
+                character = this.determineTurnOrder();
+            }
+        }
 
         while (!this.isTeamDead(this.team1) && !this.isTeamDead(this.team2)) {
-            const character = allCharacters[index % allCharacters.length];
-            this.stimulateTurn(character);
+            const characters = character[index % character.length];
+            this.stimulateTurn(characters);
             index++;
         }
 
@@ -47,4 +55,4 @@ class Fight {
     }   
 }
 
-export {Fight};
+export {Fight}
