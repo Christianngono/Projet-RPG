@@ -1,7 +1,11 @@
 import {Character} from './character.ts';
 
 class Fight {
-    constructor(private team1: Character[], private team2: Character[]) {}
+    constructor(private team1: Character[], private team2: Character[]) {
+        this.team1 = team1;
+        this.team2 = team2;
+    }
+    
     
     // Metode pour determiner l'ordre des tours en fonction de la vitesse de chaque personnage
     determineTurnOrder(): Character[] {
@@ -39,10 +43,12 @@ class Fight {
             }
         }
 
-        while (!this.isTeamDead(this.team1) && !this.isTeamDead(this.team2)) {
-            const characters = character[index % character.length];
-            this.stimulateTurn(characters);
-            index++;
+        for (let i = 0; i < this.team1.length; i++) {
+            if (this.team1[i].currentHP <= 0) {
+                this.team1.splice(i, 1);    
+            } else if (this.team2[i].currentHP <= 0) {
+                this.team2.splice(i, 1);
+            }
         }
 
         if (this.isTeamDead(this.team1)) {
@@ -55,4 +61,6 @@ class Fight {
     }   
 }
 
-export {Fight}
+
+
+export {Fight};
