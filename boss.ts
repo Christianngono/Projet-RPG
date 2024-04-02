@@ -6,22 +6,22 @@ class Boss extends Character {
 
     }
     // methode pour attaquer une attaque simple comme le paladin avec 40% de chance
-    attackTarget(target: Character) {
+    attackTarget(name: Character) {
         const damage = Math.max(0, (this.attack - this.defense) * 0.4);
-        target.takeDamage(damage);
-        console.log(`${this.name} attaque ${target}`);
+        name.takeDamage(damage);
+        console.log(`${this.name} attaque ${name}`);
     }
-    // methode pour effectuer une attaque de groupe comme le paladin avec 70% de chance
-    groupAttack(target: Character) {
+    // methode pour effectuer une attaque de groupe comme le monstre normal avec 70% de chance
+    groupAttack(name: Character) {
         const damage = Math.max(0, (this.attack - this.defense) * 0.7);
-        target.takeDamage(damage);
-        console.log(`${this.name} lance une attaque de groupe sur ${target}`);
+        name.takeDamage(damage);
+        console.log(`${this.name} lance une attaque de groupe sur ${name}`);
     }
     // methode pour effectuer une attaque de zone avec 30% de chance
-    zoneAttack(target: Character) {
-        console.log(`${this.name} lance une attaque de zone sur ${target}`);
+    zoneAttack(name: Character) {
+        console.log(`${this.name} lance une attaque de zone sur ${name}`);
         const damage = Math.max(0,(this.attack - this.defense) * 0.3);
-        target.takeDamage(damage);
+        name.takeDamage(damage);
     }
 }
 
