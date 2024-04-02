@@ -10,7 +10,10 @@ class Menu {
     }
     // methode pour selectionner une option
     selectOption(option: number): string {
-        return this.options[option - 1];
+        if(this.isOptionSelected(option)) {
+            return this.options[option - 1];
+        }
+        return "";
     }
     // methode pour savoir si l'utilisateur a sélectionné une option
     isOptionSelected(option: number): boolean {
@@ -26,7 +29,7 @@ class Menu {
             return this.ask();
         }
         return this.options[parseInt(choice) - 1];
-    }
+    }    
 }
 
-export {Menu, character};
+export {Menu};
