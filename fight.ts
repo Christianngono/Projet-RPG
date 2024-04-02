@@ -1,12 +1,20 @@
 import {Character} from './character.ts';
 
 class Fight {
-    constructor(private team1: Character[], private team2: Character[]) {
+    constructor(public team1: Character[], public team2: Character[]) {
         this.team1 = team1;
         this.team2 = team2;
     }
-    
-    
+
+    // methode pour afficher l'état de chaque personnage dans une equipe de 3 personnages
+    displayTeamState(team: Character[]): string {
+        let teamState = '';
+        team.forEach(name => {
+            teamState += `${name} : ${name.currentHP}\n`;
+        });
+        return teamState;
+    }
+
     // Metode pour determiner l'ordre des tours en fonction de la vitesse de chaque personnage
     determineTurnOrder(): Character[] {
         const allCharacters: Character[] = this.team1.concat(this.team2);
@@ -29,7 +37,7 @@ class Fight {
         }
     }
 
-    // Methode pour commencer un combat 
+    // Methode pour commencer un combat
     start() {
         console.log("debut de combat");
         let character: Character[] = this.determineTurnOrder();
@@ -58,9 +66,9 @@ class Fight {
         }
         console.log("fin de combat");
         return this.isTeamDead(this.team1) || this.isTeamDead(this.team2);
-    }   
+    }
+
+    
 }
-
-
 
 export {Fight};
