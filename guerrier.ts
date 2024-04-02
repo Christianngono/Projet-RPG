@@ -12,3 +12,5 @@ class Guerrier extends Character {
         name.takeDamage(damage);
     }       
 }
+
+export {Guerrier};
