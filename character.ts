@@ -1,14 +1,3 @@
-import { Menu } from "./menu.ts";
-const menu = new Menu("Selectionnez une option :", ["Option 1", "Option 2"]);
-menu.display();
-
-import {Fight} from "./fight.ts";
-
-// Selection d'une option
-const optionSelected = menu.ask();
-console.log("Option selectionnee :", optionSelected);
-
-
 class Character {
     constructor(
         protected name: string,
@@ -54,12 +43,5 @@ class Character {
     }
 }
 
-// Création des équipes
-const team1: Character[] = [];
-const team2: Character[] = [];
-
-const fight = new Fight(team1, team2);
-
-fight.start();
 
 export {Character};
