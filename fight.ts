@@ -21,18 +21,41 @@ class Fight {
     // Methode pour stimuler un tour de combat
     stimulateTurn(character: Character) {
 
-        // Si le personnage n'est pas mort afficher un message
+        // Vérifier si le personnage n'est pas mort afficher un message
         if (character.currentHP > 0) {
             console.log("est vivant !");
             console.log(character);
             console.log(character.currentHP);
-            const targetTeam = character === this.team1[0] ? this.team1[1] : this.team1;
-            const targetCharacter = this.determineTurnOrder()[0];
-            character.attackTarget(targetCharacter)
-            console.log(targetTeam);
         } else {
             console.log("est mort !");
+            console.log(character);
+            console.log(character.currentHP);
+            return;
         }
+        
+        // Sélectionner l'équipe cibl
+        const targetTeam = character === this.team1[0] ? this.team2 : this.team1;
+
+        // Pour chaque personnage de l'équipe cible, subir l'attaque de l'attaquant
+        targetTeam.forEach((character) => {
+            // Vérifier si la cible est vivante
+            if (character.currentHP > 0) {
+                character.attackTarget(character);
+                console.log(`${character} est vivante !`);
+                console.log(character.currentHP);
+                console.log(character.attack);
+                console.log(character.defense);
+                console.log(character.speed);
+
+            } else {
+                console.log(`${character} est déjà mort !`);
+                console.log(character);
+                console.log(character.currentHP);
+                console.log(character.attack);
+                console.log(character.defense);
+                console.log(character.speed);
+            }
+        });
     }
 
     // Methode pour commencer un combat
