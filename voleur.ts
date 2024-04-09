@@ -4,47 +4,27 @@ class Voleur extends Character {
         super(name, 50, 50, 30, 90, 90);
     }
     // methode pour ne rien voler comme objet avec 40% de chance
-    Steal(voleur: Character, object: object) {
-        const rand = Math.random();
-        if (rand === 0.4) {
-            console.log(`${voleur} ne rien voler sur ${object}`);
-            return;
-        }
+    Steal(): string {
+        return "Rien";   
     }
 
     // methode pour obtenir une potion avec 30% de chance
-    getPotion(voleur: Character, potion: object) {
-        const rand = Math.random();
-        if (rand === 0.3) {
-            console.log(`${voleur} obtient une ${potion}`);
-            return;
-        }
+    getPotion(): string {
+        return "Potion";
     }
     // methode pour obtenir un fragment d'étoile avec 15% de chance
-    getFragment(voleur: Character, fragmentStar: object) {
-        const rand = Math.random();
-        if (rand === 0.15) {
-            console.log(`${voleur} obtient un ${fragmentStar}`);
-            return;
-        }
+    getFragment(): string{
+        return "Fragment d'étoile";
     }
 
     // methode pour obtenir un éther avec 10% de chance
-    getEther(voleur: Character, ether: object) {
-        const rand = Math.random();
-        if (rand === 0.1) {
-            console.log(`${voleur} obtient un ${ether}`);
-            return;
-        }
+    getEther(): string {
+        return "Ether"
     }
 
     // methode pour obtenir une demi-étoile  avec 5% de chance
-    getHalfStar(voleur: Character, halfStar: object) {
-        const rand = Math.random();
-        if (rand === 0.05) {
-            console.log(`${voleur} obtient un ${halfStar}`);
-            return;
-        }
+    getHalfStar(): string {
+       return "Demi-étoile";
     }
 }
 
