@@ -1,18 +1,18 @@
 class Character {
     constructor(
-        protected name: string,
-        protected attack: number,
-        protected defense: number,
+        public name: string,
+        public attack: number,
+        public defense: number,
         public speed: number,
-        protected maxHP: number,
+        public maxHP: number,
         public currentHP: number,
     ) {}
 
     // methode pour attacquer un autre personnage
-    attackTarget(name: Character) {
-        const damage = this.attack - name.defense;
-        name.takeDamage(damage);
-        console.log(`${this.name} attaque ${name}`);
+    attackTarget(character: Character) {
+        const damage = this.attack - character.defense;
+        character.takeDamage(damage);
+        console.log(`${this.name} attaque ${character}`);
     }
 
     
@@ -29,19 +29,17 @@ class Character {
 
 
     // methode pour restaurer les points de vie
-    restoreHp(currentHP: number) {
-        const restoredHP = Math.floor(100 * currentHP / this.maxHP);
-        this.currentHP = restoredHP;
+    restoreHp() {
+        this.currentHP = this.maxHP;
         console.log(`${this.name} reste ${this.currentHP} points de vie`);
     }
 
     // methode pour ressuciter un personnage avec un pourcentage de vie
-    resurrect (name: Character) {
-        const restoredHP = Math.floor(100 * name.currentHP / name.maxHP);
-        name.currentHP = restoredHP;
-        console.log(`${name} est ressuscité`);
+    resurrect() {
+        // Réssuciter avec la moitié maxHP
+        this.currentHP = Math.floor(this.maxHP / 2); 
+        console.log(`${this.name} est ressuscité avec ${this.currentHP} points de vie`);
     }
 }
-
 
 export {Character};
