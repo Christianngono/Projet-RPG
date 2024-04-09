@@ -6,15 +6,7 @@ class Fight {
         this.team2 = team2;
     }
 
-    // methode pour afficher l'état de chaque personnage dans une equipe de 3 personnages
-    displayTeamState(team: Character[]): string {
-        let teamState = '';
-        team.forEach(name => {
-            teamState += `${name} : ${name.currentHP}\n`;
-        });
-        return teamState;
-    }
-
+    
     // Metode pour determiner l'ordre des tours en fonction de la vitesse de chaque personnage
     determineTurnOrder(): Character[] {
         const allCharacters: Character[] = this.team1.concat(this.team2);
@@ -31,38 +23,32 @@ class Fight {
 
         // Si le personnage n'est pas mort afficher un message
         if (character.currentHP > 0) {
-            console.log("est vivant");
-        } else if (character.currentHP <= 0) {
-            console.log("est mort");
+            console.log("est vivant !");
+            console.log(character);
+            console.log(character.currentHP);
+            const targetTeam = character === this.team1[0] ? this.team1[1] : this.team1;
+            const targetCharacter = this.determineTurnOrder()[0];
+            character.attackTarget(targetCharacter)
+            console.log(targetTeam);
+        } else {
+            console.log("est mort !");
         }
     }
 
     // Methode pour commencer un combat
     start() {
-        console.log("debut de combat");
-        let character: Character[] = this.determineTurnOrder();
+        console.log("debut de combat !");
+        const characters: Character[] = this.determineTurnOrder();
         let index = 0;
-        while (!this.isTeamDead(character)) {
-            this.stimulateTurn(character[index]);
-            index++;
-            if (index >= character.length) {
-                index = 0;
-                character = this.determineTurnOrder();
-            }
-        }
-
-        for (let i = 0; i < this.team1.length; i++) {
-            if (this.team1[i].currentHP <= 0) {
-                this.team1.splice(i, 1);    
-            } else if (this.team2[i].currentHP <= 0) {
-                this.team2.splice(i, 1);
-            }
+        while (!this.isTeamDead(this.team1) && !this.isTeamDead(this.team2)) {
+            this.stimulateTurn(characters[index]);
+            index =(index + 1) % characters.length;
         }
 
         if (this.isTeamDead(this.team1)) {
-            console.log("la team1 perdu, le joueur 2 gagne");
+            console.log("la team1 perdu, la team2 gagné !");
         } else if (!this.isTeamDead(this.team2)) {
-            console.log("la team2 perdu, le joueur 1 gagne");
+            console.log("la team2 perdu, la team1 gagné !");
         }
         console.log("fin de combat");
         return this.isTeamDead(this.team1) || this.isTeamDead(this.team2);
