@@ -40,9 +40,13 @@ class Fight {
         console.log("debut de combat !");
         const characters: Character[] = this.determineTurnOrder();
         let index = 0;
-        while (!this.isTeamDead(this.team1) && !this.isTeamDead(this.team2)) {
+        // Ajout d'un compteur de tours
+        let rounds = 0;
+
+        while (!this.isTeamDead(this.team1) && !this.isTeamDead(this.team2) && rounds < 32) {
             this.stimulateTurn(characters[index]);
             index =(index + 1) % characters.length;
+            rounds++;
         }
 
         if (this.isTeamDead(this.team1)) {
@@ -52,9 +56,7 @@ class Fight {
         }
         console.log("fin de combat");
         return this.isTeamDead(this.team1) || this.isTeamDead(this.team2);
-    }
-
-    
+    }   
 }
 
 export {Fight};
