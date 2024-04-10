@@ -1,9 +1,7 @@
-import {Voleur} from "./voleur.ts";
-
 class Outil {
-    static Steal(voleur: Voleur): string {
+    static Steal(voleur: {getPotion(): string; getFragment(): string; getEther(): string; getHalfStar(): string}): string {
         const rand = Math.random() * 100;
-        if (rand < 0.4) {
+        if (rand < 40) {
             return "rien";
         } else if (rand  < 70) {
             return voleur.getPotion();;

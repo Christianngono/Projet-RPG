@@ -20,40 +20,29 @@ class Fight {
 
     // Methode pour stimuler un tour de combat
     stimulateTurn(character: Character) {
-
-        // Vérifier si le personnage n'est pas mort afficher un message
-        if (character.currentHP > 0) {
-            console.log("est vivant !");
-            console.log(character);
-            console.log(character.currentHP);
-        } else {
-            console.log("est mort !");
-            console.log(character);
-            console.log(character.currentHP);
-            return;
-        }
         
-        // Sélectionner l'équipe cibl
+        // Sélectionner l'équipe cible
         const targetTeam = character === this.team1[0] ? this.team2 : this.team1;
 
         // Pour chaque personnage de l'équipe cible, subir l'attaque de l'attaquant
-        targetTeam.forEach((character) => {
-            // Vérifier si la cible est vivante
-            if (character.currentHP > 0) {
-                character.attackTarget(character);
-                console.log(`${character} est vivante !`);
-                console.log(character.currentHP);
-                console.log(character.attack);
-                console.log(character.defense);
-                console.log(character.speed);
+        targetTeam.forEach((targetCharacter) => {
+            // Vérifier si la cible est vivante et si ce n'est pas le même personnage que l'attaquant
+            if (targetCharacter.currentHP > 0 && targetCharacter !== character) {
+                console.log(`${targetCharacter.names} est vivant !`);
+                console.log(targetCharacter.currentHP);
+                console.log(targetCharacter.attack);
+                console.log(targetCharacter.defense);
+                console.log(targetCharacter.speed);
+                return;
+
 
             } else {
-                console.log(`${character} est déjà mort !`);
-                console.log(character);
-                console.log(character.currentHP);
-                console.log(character.attack);
-                console.log(character.defense);
-                console.log(character.speed);
+                console.log(`${targetCharacter.names} est déjà mort !`);
+                console.log(targetCharacter.currentHP);
+                console.log(targetCharacter.attack);
+                console.log(targetCharacter.defense);
+                console.log(targetCharacter.speed);
+                return;
             }
         });
     }
@@ -66,13 +55,13 @@ class Fight {
         // Ajout d'un compteur de tours
         let rounds = 0;
 
-        while (!this.isTeamDead(this.team1) && !this.isTeamDead(this.team2) && rounds < 32) {
+        while (!this.isTeamDead(this.team1) && !this.isTeamDead(this.team2) && rounds < 8) {
             this.stimulateTurn(characters[index]);
             index =(index + 1) % characters.length;
             rounds++;
         }
 
-        if (this.isTeamDead(this.team1)) {
+        if (!this.isTeamDead(this.team1)) {
             console.log("la team1 perdu, la team2 gagné !");
         } else if (!this.isTeamDead(this.team2)) {
             console.log("la team2 perdu, la team1 gagné !");

@@ -8,48 +8,63 @@ import { Priest } from "./priest.ts";
 import { Mage } from "./mage.ts";
 import { Barbare } from "./barbare.ts";
 import { Monstre } from "./monstre.ts";
-
-const args = Deno.args;
+import {Menu} from "./menu.ts";
 
 const selectedCharacters: Character[] = [];
 
-// Vérifier si le nombre d'arguments est valide
-if (args.length !== 8) {
-  console.log("Veuillez sélectionner exactement 8 personnages.");
-  Deno.exit(1);
-}
 
-// Sélectionner les personnages en fonction des arguments de ligne de commande
-for (let i = 0; i < args.length; i++) {
-  const optionSelected = args[i];
+// utiliser la classe Menu pour sélectionner les personnages
+const characterMenu = new Menu("Sélectionnez un personnage :", [
+  "Guerrier",
+  "Mage",
+  "Paladin",
+  "Barbare",
+  "Priest",
+  "Voleur",
+  "Boss",
+  "Monstre",
+]);
+
+// Sélectionner les personnages de la team1 en fonction des arguments
+for (let i = 0; i < 3; i++) {
+  const optionSelected = characterMenu.ask();
   const character = createCharacter(optionSelected);
   if (character) {
     selectedCharacters.push(character);
   } else {
     console.log(`Personnage invalide pour l'argument ${i + 1}`);
-    Deno.exit(1);
+    Deno.exit(i);
   }
 }
 
-// Diviser les personnages en deux équipes
-const team1: Character[] = selectedCharacters.slice(0, 4);
-const team2: Character[] = selectedCharacters.slice(4, 8);
+// Demander à l'utilisateur de sélectionner les personnages de la team2
+for (let i = 0; i < 3; i++) {
+  const optionSelected = characterMenu.ask();
+  const character = createCharacter(optionSelected);
+  if (character) {
+    selectedCharacters.push(character);
+  } else {
+    console.log(`Personnage invalide pour l'argument ${i + 4}`);
+    Deno.exit(i + 4);
+  }
+} 
 
-// Afficher les personnages sélectionnés pour la team1
-console.log("Personnages sélectionnés pour la team1 :");
-team1.forEach((character, index) => {
-  console.log(`Personnage ${index + 1}: ${character.name}`);
-});
+// Demander à l'utilisateur de lancer le combat
+const launchMenu = new Menu("Lancer le combat ?", ["Oui", "Non"]);
+const choice = launchMenu.ask();
 
-// Afficher les personnages sélectionnés pour la team2
-console.log("Personnages sélectionnés pour la team2 :");
-team2.forEach((character, index) => {
-  console.log(`Personnage ${index + 1}: ${character.name}`);
-});
+if (choice === "Oui") {
+  // Diviser les personnages en deux équipes
+const team1: Character[] = selectedCharacters.slice(0, 3);
+const team2: Character[] = selectedCharacters.slice(3, 6);
 
 // Commencer le combat
 const fight = new Fight(team1, team2);
 fight.start();
+
+} else {
+  console.log("fin du combat");
+}
 
 // Fonction pour créer un personnage en fonction de l'option sélectionnée
 function createCharacter(optionSelected: string): Character | null {

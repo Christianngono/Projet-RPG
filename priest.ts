@@ -2,14 +2,19 @@ import {Character} from "./character.ts";
 
 class Priest extends Character {
     constructor(name: string) {
-        super(name, 71, 30, 10, 80, 80);
+        super([name], 71, 30, 10, 80, 80);
     }
     // methode pour restaurer 25 pourcent de sa vie ou celle de son allié
-    heal(name: Character) {
-        console.log(`${this.name} lance un soin sur ${name}`);
-        const healedAmount = Math.floor(this.currentHP * 0.25);
-        name.restoreHp(healedAmount);
-    }   
+    heal(names: Character[]) {
+        const heal = Math.max(0, this.currentHP * 0.25);
+        names.forEach((name) => {
+            name.takeDamage(heal, 0);
+            console.log(`${this.names} restaure ${heal} de sa vie`);
+            console.log(`${name.names} restaure ${heal} de sa vie`);
+        });
+        this.takeDamage(heal, 0);
+        console.log(`${this.names} restaure ${heal} de sa vie`);    
+    }      
 }
 
 export {Priest};
