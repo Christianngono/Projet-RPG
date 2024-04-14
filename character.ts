@@ -6,20 +6,17 @@ class Character {
         public speed: number,
         public maxHP: number,
         public currentHP: number,
+        public objects: string[] = [],
     ) {}
 
     // methode pour attacquer un autre personnage
-    attackTarget(names: Character[]) {
-        const damage = Math.max(0, (this.attack - this.defense) * 0.4);
-        names.forEach((name) => {
-            name.takeDamage(damage, 0);
-            console.log(`${name} lance une attaque sur ${this.names}`);
+    attackTarget(targets: Character[]) {
+        const damage = Math.max(this.attack - this.defense) * 0.4;
+        targets.forEach((target) => {
+            target.takeDamage(damage, 0);
+            console.log(`${this.names} lance une attaque sur ${target.names}`);
         });
-        
-
     }
-
-    
 
     // methode pour prendre des dégats
     takeDamage(attack: number, defense: number) {
@@ -44,6 +41,12 @@ class Character {
         this.currentHP = Math.floor(this.maxHP / 2); 
         console.log(`${this.names} est ressuscité avec ${this.currentHP} points de vie`);
     }
+    // Utiliser les Objets pour combattre
+    useObjects(objects: string) {
+        this.objects.push(objects);
+        console.log(`${this.names} utilise ${objects}`);
+    }
 }
 
 export {Character};
+
