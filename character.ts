@@ -13,18 +13,18 @@ class Character {
     attackTarget(targets: Character[]) {
         const damage = Math.max(this.attack - this.defense) * 0.4;
         targets.forEach((target) => {
-            target.takeDamage(damage, 0);
+            target.takeDamage(damage);
             console.log(`${this.names} lance une attaque sur ${target.names}`);
         });
     }
 
     // methode pour prendre des dégats
-    takeDamage(attack: number, defense: number) {
-        this.currentHP -= attack - defense;
+    takeDamage(attack: number) {
+        this.currentHP -= Math.max(attack, 0);
         if (this.currentHP < 0) {
             this.currentHP = 0;
         }
-        console.log(`${this.names} prend ${attack - defense} de dégats`);
+        console.log(`${this.names} prend ${attack} de dégats`);
         console.log(`${this.names} reste ${this.currentHP} de vie`);  
     }
 
@@ -32,7 +32,7 @@ class Character {
     // methode pour restaurer les points de vie
     restoreHp() {
         this.currentHP = this.maxHP;
-        console.log(`${this.names} reste ${this.currentHP} points de vie`);
+        console.log(`${this.names} restaure ${this.currentHP} de vie`);   
     }
 
     // methode pour ressuciter un personnage avec un pourcentage de vie
