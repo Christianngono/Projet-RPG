@@ -14,7 +14,7 @@ const selectedCharacters: Character[] = [];
 
 
 // utiliser la classe Menu pour sélectionner les personnages
-const characterMenu = new Menu("Sélectionnez un personnage :", [
+const characters = new Menu("Sélectionnez un personnage :", [
   "Guerrier",
   "Mage",
   "Paladin",
@@ -27,7 +27,7 @@ const characterMenu = new Menu("Sélectionnez un personnage :", [
 
 // Sélectionner les personnages de la team1 en fonction des arguments
 for (let i = 0; i < 3; i++) {
-  const optionSelected = characterMenu.ask();
+  const optionSelected = characters.ask();
   const character = createCharacter(optionSelected);
   if (character) {
     selectedCharacters.push(character);
@@ -39,32 +39,46 @@ for (let i = 0; i < 3; i++) {
 
 // Demander à l'utilisateur de sélectionner les personnages de la team2
 for (let i = 0; i < 3; i++) {
-  const optionSelected = characterMenu.ask();
+  const optionSelected = characters.ask();
   const character = createCharacter(optionSelected);
   if (character) {
     selectedCharacters.push(character);
   } else {
     console.log(`Personnage invalide pour l'argument ${i + 4}`);
-    Deno.exit(i + 4);
+    Deno.exit(i + 3);
   }
-} 
+}
+
+// Afficher les personnages de la team1
+console.log("Team1 :");
+selectedCharacters.slice(0, 3).forEach((character, index) => {
+  console.log(`${index + 1}: ${character.names}`);
+});
+
+// Afficher les personnages de la team2
+console.log("Team2 :");
+selectedCharacters.slice(3, 6).forEach((character, index) => {
+  console.log(`${index + 1}: ${character.names}`);
+});
 
 // Demander à l'utilisateur de lancer le combat
-const launchMenu = new Menu("Lancer le combat ?", ["Oui", "Non"]);
+const launchMenu = new Menu("Voulez-vous lancer le combat maintenant?", ["Oui", "Non",]);
 const choice = launchMenu.ask();
+
+if(choice === "Non") {
+  Deno.exit(0);
+}
 
 if (choice === "Oui") {
   // Diviser les personnages en deux équipes
-const team1: Character[] = selectedCharacters.slice(0, 3);
-const team2: Character[] = selectedCharacters.slice(3, 6);
+const characters: Character[] = selectedCharacters.slice(0, 3);
+const enemies: Character[] = selectedCharacters.slice(3, 6);
 
 // Commencer le combat
-const fight = new Fight(team1, team2);
+const fight = new Fight(characters,  enemies);
 fight.start();
 
-} else {
-  console.log("fin du combat");
-}
+} 
 
 // Fonction pour créer un personnage en fonction de l'option sélectionnée
 function createCharacter(optionSelected: string): Character | null {
