@@ -33,7 +33,7 @@ class Enemy extends Character {
         // Vérifier si l'ennemi cible le personnage aux PV les plus bas ou un aventurier au hasard
         const targetCharacter = this.chooseTarget(names);
 
-        targetCharacter.takeDamage(damage, 0);
+        targetCharacter.takeDamage(damage);
         console.log(`${this.names} lance une ${this.attackType} sur ${targetCharacter.names} et inflige ${damage} de dégats`);   
     }
     
