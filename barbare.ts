@@ -7,7 +7,7 @@ class Barbare extends Character {
     berserkAttack(names: Character[]) {
         const damage = Math.max(0, (this.attack - this.defense) * 1.3);
         names.forEach((name) => {
-            name.takeDamage(damage, 0);
+            name.takeDamage(damage);
             console.log(`${this.names} lance une attaque berserk sur ${name.names}`);
 
         });  
@@ -15,7 +15,7 @@ class Barbare extends Character {
     // methode pour perdre 20 pourcent de sa vie en effectuant une attaque Berserk
     HurtSelf() {
         const damage = Math.max(0, this.currentHP * 0.2);
-        this.takeDamage(damage, 0);
+        this.takeDamage(damage);
         console.log(`${this.names} se blesse lors d'une attaque berserk sur ${name}`);
     }
 
