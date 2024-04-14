@@ -46,9 +46,8 @@ class Menu {
             console.log("Choix invalide ! Veuillez sélectionner à nouveau.");
             return this.askForObject();
         }
-        return objectsOptions[parseInt(choice) - 1];
-        
+        return objectsOptions[parseInt(choice) - 1];   
     }
-}
+}    
 
 export {Menu};
