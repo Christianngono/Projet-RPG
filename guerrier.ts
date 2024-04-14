@@ -10,7 +10,7 @@ class Guerrier extends Character {
 
         const damage = Math.max(0, this.attack - this.defense);
         names.forEach((name) => {
-            name.takeDamage(damage, 0);
+            name.takeDamage(damage);
             console.log(`${name.names} lance une attaque sur ${this.names}`);
         });
     }       
