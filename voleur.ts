@@ -54,3 +54,4 @@ class Voleur extends Character {
 
 export {Voleur};
     
+    
