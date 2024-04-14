@@ -70,7 +70,6 @@ const objectsMenuTeam1 = new Menu("Choisissez les outils pour vos personnages :"
   "Demi-étoile",
   "Ether",
 ]);
-
 const selectedObjectsTeam1: string[] = [];
 for (let i = 0; i < 3; i++) {
   const selectedObject = objectsMenuTeam1.askForObject();
@@ -100,8 +99,6 @@ selectedCharacters.slice(0, 3).forEach((character, index) => {
 selectedCharacters.slice(3, 6).forEach((character, index) => {
   character.objects.push(selectedObjectsTeam2[index]);
 });
-
-
 
 // Demander à l'utilisateur de lancer le combat
 const launchMenu = new Menu("Voulez-vous lancer le combat maintenant?", ["Oui", "Non",]);
@@ -146,3 +143,7 @@ function createCharacter(optionSelected: string): Character | null {
       return null;
   }
 }
+
+
+
+
