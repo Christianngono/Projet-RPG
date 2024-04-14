@@ -7,7 +7,7 @@ class Paladin extends Character {
     holyAttack(names: Character[]) {
         const damage = Math.max(0, (this.attack - this.defense) * 0.4);
         names.forEach((name) => {
-            name.takeDamage(damage, 0);
+            name.takeDamage(damage);
             console.log(`${this.names} lance une attaque sainte sur ${names}`);
         });
     }
@@ -16,7 +16,7 @@ class Paladin extends Character {
         console.log("attaque de groupe");
         const damage = Math.max(0, (this.attack - this.defense) * 0.3);
         names.forEach((name) => {
-            name.takeDamage(damage, 0);
+            name.takeDamage(damage);
             console.log(`${this.names} lance une attaque de groupe sur ${names}`);
         });
     }
