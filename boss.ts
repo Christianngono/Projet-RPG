@@ -2,7 +2,7 @@ import {Character} from "./character.ts";
 
 class Boss extends Character {
     constructor(name: string) {
-        super([name], 80, 60, 35, 100, 100);
+        super([name], 80, 30, 35, 100, 100);
 
     }
     // methode pour attaquer une attaque simple comme le paladin avec 40% de chance
