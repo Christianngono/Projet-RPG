@@ -12,7 +12,7 @@ class Monstre extends Character {
             console.log(`${Monstre} lance une attaque normale sur ${names}`);
             const damage = Math.max(0, (this.attack - this.defense) * 0.2);
             names.forEach((name) => {
-                name.takeDamage(damage, 0);
+                name.takeDamage(damage);
             });
         
         }    
@@ -25,7 +25,7 @@ class Monstre extends Character {
             console.log(`${Monstre} lance une attaque hasardeuse sur ${names}`);
             const damage = Math.max(0, (this.attack - this.defense) * 0.8);
             names.forEach((name) => {
-                name.takeDamage(damage, 0);
+                name.takeDamage(damage);
             });
         }
     }
