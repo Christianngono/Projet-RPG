@@ -10,6 +10,7 @@ import { Barbare } from "./barbare.ts";
 import { Monstre } from "./monstre.ts";
 import {Menu} from "./menu.ts";
 
+
 const selectedCharacters: Character[] = [];
 
 
@@ -60,6 +61,47 @@ console.log("Team2 :");
 selectedCharacters.slice(3, 6).forEach((character, index) => {
   console.log(`${index + 1}: ${character.names}`);
 });
+
+// Demander à l'utilisateur de choisir les outils pour les personnages de la team1
+console.log("Sélectionnez les outils pour la Team1 :")
+const objectsMenuTeam1 = new Menu("Choisissez les outils pour vos personnages :", [
+  "Potion",
+  "StarFragment",
+  "Demi-étoile",
+  "Ether",
+]);
+
+const selectedObjectsTeam1: string[] = [];
+for (let i = 0; i < 3; i++) {
+  const selectedObject = objectsMenuTeam1.askForObject();
+  selectedObjectsTeam1.push(selectedObject);
+}
+
+// Demander à l'utilisateur de choisir les outils pour les personnages de la team2
+console.log("Sélectionnez les outils pour la Team2 :");
+const objectsMenuTeam2 = new Menu("Choisissez un outil :", [
+  "Potion",
+  "StarFragment",
+  "Demi-étoile",
+  "Ether",
+]);
+const selectedObjectsTeam2: string[] = [];
+
+for (let i = 0; i < 3; i++) {
+  const selectedObject = objectsMenuTeam2.askForObject();
+  selectedObjectsTeam2.push(selectedObject);
+}
+
+// Assigner les outils sélectionnés aux personnages
+selectedCharacters.slice(0, 3).forEach((character, index) => {
+  character.objects.push(selectedObjectsTeam1[index]);
+});
+
+selectedCharacters.slice(3, 6).forEach((character, index) => {
+  character.objects.push(selectedObjectsTeam2[index]);
+});
+
+
 
 // Demander à l'utilisateur de lancer le combat
 const launchMenu = new Menu("Voulez-vous lancer le combat maintenant?", ["Oui", "Non",]);
