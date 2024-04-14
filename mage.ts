@@ -8,7 +8,7 @@ class Mage extends Character {
     magicAttack(names: Character[]){ 
         // effectuer les domages magiques sans tenir compte de la défense de l'ennemi
         const Damage = Math.max(0, this.attack - this.defense);
-        this.takeDamage(Damage, 0);
+        this.takeDamage(Damage);
         console.log(`${this.names} lance une attaque magique sur ${names}`);
     }
 }
