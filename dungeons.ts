@@ -1,8 +1,7 @@
 
 import {Enemy} from "./enemies.ts";
 import {Character} from "./character.ts";
-import {Boss} from "./boss.ts";
-import {Outil} from "./outil.ts";
+import {Boss} from "./boss.ts"
 import { Fight } from "./fight.ts";
 
 
@@ -23,7 +22,7 @@ class DungeonRoom {
             // Gérer un coffre 
             console.log("Ouvrez un coffre");
 
-            if (this.loot instanceof Outil) {
+            if (this.loot instanceof Object) {
                 console.log(`Vous avez obtenu : ${this.loot}`);
                 // Ajouter l'objet à l'inventaire des personnages
                 characters.forEach(character => character.objects.push());
@@ -33,7 +32,7 @@ class DungeonRoom {
                 console.log("Vous subissez des dégâts...");
 
                 // Réduire les points de vie des personnages
-                characters.forEach((character) => character.takeDamage(20, 0));
+                characters.forEach((character) => character.takeDamage(20));
 
             }
         } else if (this.encounter === "boss") {
