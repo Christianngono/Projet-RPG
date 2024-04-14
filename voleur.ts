@@ -1,5 +1,5 @@
 import {Character} from "./character.ts";
-import {Outil} from "./outil.ts";
+import {Objects} from "./objects.ts";
 
 class Voleur extends Character {
     constructor(name: string) {
@@ -12,7 +12,7 @@ class Voleur extends Character {
             return "rien";
         }
         // Le voleur vole quelque chose en utilisant la classe Outil
-        return Outil.Steal(this);   
+        return Objects.Steal(this);   
     }
 
     // methode pour obtenir une potion avec 30% de chance
@@ -22,7 +22,7 @@ class Voleur extends Character {
             return "Potion";
         }
         
-        return "rien";
+        return "Potion";
     }
     // methode pour obtenir un fragment d'étoile avec 15% de chance
     getFragment(): string{
@@ -30,7 +30,7 @@ class Voleur extends Character {
         if (rand < 0.15) {
             return "Fragment d'étoile";
         }
-        return "rien";
+        return "Fragment";
     }
 
     // methode pour obtenir un éther avec 10% de chance
@@ -39,7 +39,7 @@ class Voleur extends Character {
         if (rand < 0.1) {
             return "Ether";
         }
-        return "rien"
+        return "Ether";
     }
 
     // methode pour obtenir une demi-étoile  avec 5% de chance
@@ -48,7 +48,7 @@ class Voleur extends Character {
         if (rand < 0.05) {
             return "Demi-étoile";
         }
-        return "rien";
+        return "Demi-étoile";
     }   
 }
 
