@@ -8,11 +8,11 @@ class Priest extends Character {
     heal(names: Character[]) {
         const heal = Math.max(0, this.currentHP * 0.25);
         names.forEach((name) => {
-            name.takeDamage(heal, 0);
+            name.takeDamage(heal);
             console.log(`${this.names} restaure ${heal} de sa vie`);
             console.log(`${name.names} restaure ${heal} de sa vie`);
         });
-        this.takeDamage(heal, 0);
+        this.takeDamage(heal);
         console.log(`${this.names} restaure ${heal} de sa vie`);    
     }      
 }
